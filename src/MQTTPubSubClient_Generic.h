@@ -285,6 +285,7 @@ class PubSubClient
 
     bool subscribe(const String& topic, const uint8_t& qos, const topic_callback_t& cb)
     {
+    	(void)(cb);
       if (!isConnected())
       {
         MQTT_LOGERROR("PubSubClient::subscribe: Error, not connected");
@@ -303,7 +304,7 @@ class PubSubClient
         return false;
       }
 
-      callbacks[topic] = cb;
+      //callbacks[topic] = cb;
 
       return true;
     }
@@ -330,7 +331,7 @@ class PubSubClient
         return false;
       }
 
-      callbacks.erase(topic);
+      //callbacks.erase(topic);
 
       return true;
     }

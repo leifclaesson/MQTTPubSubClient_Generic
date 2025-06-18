@@ -45,15 +45,32 @@
   #define _MQTT_PUBSUB_LOGLEVEL_       1
 #endif
 
+
 /////////////////////////////////////////////////////////
 
 #define MQTT_PRINT_MARK      MQTT_PRINT("[MQTT] ")
+
+#if _MQTT_PUBSUB_LOGLEVEL_ == 0
+
+void mqtt_dbg_nop(const char * format, ...);
+
+#define MQTT_PRINT_SP        mqtt_dbg_nop(" ")
+#define MQTT_PRINT_SP0X      mqtt_dbg_nop(" 0x")
+
+#define MQTT_PRINT           mqtt_dbg_nop
+#define MQTT_PRINTLN         mqtt_dbg_nop
+#define MQTT_PRINTF          mqtt_dbg_nop
+
+#else
+
 #define MQTT_PRINT_SP        DBG_PORT_MQTT.print(" ")
 #define MQTT_PRINT_SP0X      DBG_PORT_MQTT.print(" 0x")
 
 #define MQTT_PRINT           DBG_PORT_MQTT.print
 #define MQTT_PRINTLN         DBG_PORT_MQTT.println
 #define MQTT_PRINTF          DBG_PORT_MQTT.printf
+
+#endif
 
 /////////////////////////////////////////////////////////
 
